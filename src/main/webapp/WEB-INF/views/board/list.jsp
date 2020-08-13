@@ -4,6 +4,7 @@
 <html>
 	<head>
 	 	<title>게시판</title>
+
 	</head>
 	<body>
 		<div id="root">
@@ -18,7 +19,7 @@
 			<hr />
 			
 			<section id="container">
-				<form role="form" method="post" action="/board/write">
+				<form role="form" method="post" action="${pageContext.request.contextPath}/board/write">
 					<table>
 						<tr><th>번호</th><th>제목</th><th>작성자</th><th>등록일</th></tr>
 						
