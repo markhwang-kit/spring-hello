@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.naver.dao.BoardDAO;
 import com.naver.vo.BoardVO;
+import com.naver.vo.Criteria;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -19,11 +20,6 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void write(BoardVO boardVO) throws Exception {
 		dao.write(boardVO);
-	}
-
-	@Override
-	public List<BoardVO> list() throws Exception {
-		return dao.list();
 	}
 
 	@Override
@@ -41,6 +37,16 @@ public class BoardServiceImpl implements BoardService {
 	public void delete(int bno) throws Exception {
 		
 		dao.delete(bno);
+	}
+
+	@Override
+	public List<BoardVO> list(Criteria cri) throws Exception {
+		return dao.list(cri);
+	}
+
+	@Override
+	public int listCount() throws Exception {
+		return dao.listCount();
 	}
 
 }

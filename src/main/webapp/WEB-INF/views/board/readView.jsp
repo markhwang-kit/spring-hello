@@ -16,11 +16,17 @@ $(document).ready(function(){
 		formObj.submit();				
 	})
 	
-	// 삭제
+		// 삭제
 	$(".delete_btn").on("click", function(){
+		
+		var deleteYN = confirm("삭제하시겠습니가?");
+		if(deleteYN == true){
+			
 		formObj.attr("action", "${pageContext.request.contextPath}/board/delete");
 		formObj.attr("method", "post");
 		formObj.submit();
+			
+		}
 	})
 	
 	// 취소
@@ -39,9 +45,9 @@ $(document).ready(function(){
 			</header>
 			<hr />
 			 
-			<nav>
-			  홈 - 글 작성
-			</nav>
+			<div>
+				<%@include file="nav.jsp" %>
+			</div>
 			<hr />
 			
 			<section id="container">
