@@ -6,35 +6,39 @@
 	 	<title>게시판</title>
 	 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script type="text/javascript">
-$(document).ready(function(){
-	var formObj = $("form[name='readForm']");
-	
-	// 수정 
-	$(".update_btn").on("click", function(){
-		formObj.attr("action", "${pageContext.request.contextPath}/board/updateView");
-		formObj.attr("method", "get");
-		formObj.submit();				
-	})
-	
-		// 삭제
-	$(".delete_btn").on("click", function(){
-		
-		var deleteYN = confirm("삭제하시겠습니가?");
-		if(deleteYN == true){
+		$(document).ready(function(){
+			var formObj = $("form[name='readForm']");
 			
-		formObj.attr("action", "${pageContext.request.contextPath}/board/delete");
-		formObj.attr("method", "post");
-		formObj.submit();
+			// 수정 
+			$(".update_btn").on("click", function(){
+				formObj.attr("action", "${pageContext.request.contextPath}/board/updateView");
+				formObj.attr("method", "get");
+				formObj.submit();				
+			})
 			
-		}
-	})
-	
-	// 취소
-	$(".list_btn").on("click", function(){
+				// 삭제
+			$(".delete_btn").on("click", function(){
+				
+				var deleteYN = confirm("삭제하시겠습니가?");
+				if(deleteYN == true){
+					
+				formObj.attr("action", "${pageContext.request.contextPath}/board/delete");
+				formObj.attr("method", "post");
+				formObj.submit();
+					
+				}
+			})
+			
+			// 목록
+			$(".list_btn").on("click", function(){
+			
+			location.href = "${pageContext.request.contextPath}/board/list?page=${scri.page}"
+			+"&perPageNum=${scri.perPageNum}"
+			+"&searchType=${scri.searchType}&keyword=${scri.keyword}";
+			})
+		})
 		
-		location.href = "${pageContext.request.contextPath}/board/list";
-	})
-})
+	
 </script>
 	</head>
 	<body>
@@ -51,9 +55,13 @@ $(document).ready(function(){
 			<hr />
 			
 			<section id="container">
-				<form name="readForm" role="form" method="post">
-					<input type="hidden" id="bno" name="bno" value="${read.bno}" />
-				</form>
+					<form name="readForm" role="form" method="post">
+					  <input type="hidden" id="bno" name="bno" value="${read.bno}" />
+					  <input type="hidden" id="page" name="page" value="${scri.page}"> 
+					  <input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}"> 
+					  <input type="hidden" id="searchType" name="searchType" value="${scri.searchType}"> 
+					  <input type="hidden" id="keyword" name="keyword" value="${scri.keyword}"> 
+					</form>
 					<table>
 						<tbody>
 							<tr>
