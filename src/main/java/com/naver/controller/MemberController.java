@@ -33,20 +33,31 @@ public class MemberController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(MemberVO vo, HttpServletRequest req, RedirectAttributes rttr) throws Exception {
 		logger.info("post login");
-
+		String email = req.getParameter("email");
+		
 		System.out.println(vo.getEmail());
 		System.out.println(vo.getPw());
 		HttpSession session = req.getSession();
 		MemberVO login = service.login(vo);
-
-		boolean pwdMatch = pwdEncoder.matches(vo.getPw(), login.getPw());
-
-		if (login != null && pwdMatch == true) {
+		System.out.println(login);
+		
+		boolean pwdMatch = false;
+		if (login != null && vo != null) {
+			pwdMatch = pwdEncoder.matches(vo.getPw(), login.getPw());
+		}
+		if (pwdMatch == true) {
 			session.setAttribute("member", login);
 		} else {
 			session.setAttribute("member", null);
 			rttr.addFlashAttribute("msg", false);
 		}
+
+//		if (login != null && pwdMatch == true) {
+//			session.setAttribute("member", login);
+//		} else {
+//			session.setAttribute("member", null);
+//			rttr.addFlashAttribute("msg", false);
+//		}
 
 		return "redirect:/";
 	}
